@@ -1,6 +1,7 @@
 // Auto-calculate total fee
 let subjects = document.querySelectorAll(".subject");
 let totalBox = document.getElementById("total");
+let res = document.getElementById("result");
 
 subjects.forEach(item => {
     item.addEventListener("change", () => {
@@ -47,5 +48,6 @@ document.getElementById("regForm").addEventListener("submit", function(e){
         "Selected Subjects:\n- " + selectedSubjects.join("\n- ") + "\n\n" +
         "Total Fee: ₹" + totalFee;
 
-    alert(message);
+    // alert(message);
+    res.innerText=message;
 });
