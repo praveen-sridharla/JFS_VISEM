@@ -108,16 +108,38 @@ System.out.println("Student updated successfully");
 
 // EXISTS
 public boolean exists(int id) throws Exception {
-String sql = "SELECT 1 FROM student WHERE id = ?";
+      String sql = "SELECT 1 FROM student WHERE id = ?";
 
 
-try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-PreparedStatement ps = conn.prepareStatement(sql)) {
+      try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            PreparedStatement ps = conn.prepareStatement(sql)) {
 
 
-ps.setInt(1, id);
-ResultSet rs = ps.executeQuery();
-return rs.next();
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+      }
+      }
+public void countStudentsByDeptDesc() throws Exception {
+    String sql = 
+        "SELECT dept, COUNT(id) AS total_students " +
+        "FROM student " +
+        "GROUP BY dept " +
+        "ORDER BY total_students DESC";
+
+    try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        System.out.println("\nDepartment-wise Student Count (Descending)");
+        System.out.println("-----------------------------------------");
+
+        while (rs.next()) {
+            String dept = rs.getString("dept");
+            int count = rs.getInt("total_students");
+            System.out.println(dept + " : " + count);
+        }
+    }
 }
-}
+
 }

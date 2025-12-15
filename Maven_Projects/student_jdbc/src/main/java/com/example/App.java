@@ -37,7 +37,8 @@ public class App {
                 System.err.println("3.Delete Student");
                 System.err.println("4.View all Studnets");
                 System.err.println("5.Did the Student exist");
-                System.err.println("6.exit");
+                System.err.println("6.Count the no.of Students in each dept");
+                System.err.println("7.exit");
                 System.err.println("Enter a option from the above :");
                 int opt = sc.nextInt();
                 sc.nextLine(); // consume newline
@@ -105,8 +106,10 @@ public class App {
                         }
                         break;
                             
-
                     case 6:
+                        dao.countStudentsByDeptDesc();
+                        break;
+                    case 7:
                         System.out.println("Exiting...");
                         System.exit(0);
                         break;
